@@ -46,15 +46,14 @@ print("query")
 # query and its answer
 query = input("type query:--")
 ans =chain.invoke({"query":query})
-
-
 print("ans:-->", ans)
+# important  here internet is necessary becoz it used rpc function of the supabase to compare embeddings
 
 
 
 
 # (successfully run and give  answer according to context )
-
+#  using flask 
 
 from PyPDF2 import PdfReader
 from langchain_openai import OpenAIEmbeddings
