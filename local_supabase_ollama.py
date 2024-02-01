@@ -13,10 +13,10 @@ from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.llms import Ollama
 from supabase import create_client, Client
 
-supabase_client = create_client("https://oxkmkprtwkuiewajaqvx.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94a21rcHJ0d2t1aWV3YWphcXZ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDM4Mzc3MDEsImV4cCI6MjAxOTQxMzcwMX0.vWKFLz2r_RzuJ_ZnsMFvp0srckuMcjCiB7RkfhlGj_c")
-
-ollama_embeddings = OllamaEmbeddings(model="luffy",base_url = 'http://127.0.0.1:11434')
-model = Ollama(model="luffy",base_url = 'http://127.0.0.1:11434')
+from dotenv import load_dotenv
+load_dotenv()
+url,key = os.getenv("SUPABASE_URL"),os.getenv("SUPABASE_KEY")
+supabase_client = create_client(url, key)
 
 doc_reader = PyPDFLoader("impromptu-rh.pdf")
 docs = doc_reader.load_and_split()[0:5]
