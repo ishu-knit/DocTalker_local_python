@@ -26,7 +26,8 @@ print("pdf load")
 from langchain_community.llms import Ollama
 model = Ollama(model="luffy",base_url = 'http://127.0.0.1:11434')
 # make vectorstore
-# vectorstore = SupabaseVectorStore.from_documents(docs,ollama_embeddings,client=supabase_client)
+# default is documents and match_documents for table_name , query_name respectively
+# vectorstore = SupabaseVectorStore.from_documents(docs,ollama_embeddings,client=supabase_client,table_name="documents , query_name="match_documents")
 # load database
 vectorstore = SupabaseVectorStore(
             client=supabase_client,
