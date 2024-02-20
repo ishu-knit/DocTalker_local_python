@@ -8,7 +8,6 @@
 # }
 
 
-
 from langchain_community.vectorstores import   SupabaseVectorStore
 import os   
 from supabase import create_client
