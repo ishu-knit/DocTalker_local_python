@@ -1,5 +1,4 @@
 # (successfully run + giving ans to text only not other info)
-# (successfully run + giving ans to text only not other info)
 
 from langchain_community.vectorstores import FAISS    
 import os   
