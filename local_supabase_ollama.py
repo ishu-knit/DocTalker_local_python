@@ -74,6 +74,7 @@ model = Ollama(model="luffy",base_url = 'http://127.0.0.1:11434',temperature=1)
 
 
 doc_reader = PyPDFLoader("pdfs/prompt.pdf")
+# doc_reader = PyPDFDirectoryLoader("pdfs")         here pdfs is the name of the pdfs folder which is created parellel to this file 
 
 docs = doc_reader.load_and_split()[0:5]
 
