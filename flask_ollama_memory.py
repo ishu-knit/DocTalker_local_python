@@ -8,8 +8,19 @@
 # }
 
 
+
+# successfully run 
+# flask + locally ollama + Memory + retrivalQA   
+# in postman 
+#   link :--  POST  http://127.0.0.1:5000/api/query for query 
+#  body {   
+#     // "query":"give me 5 question that i created for the exam  in points",
+#     "text":"hello"
+# }
+
+
+
 from langchain_community.vectorstores import   SupabaseVectorStore
-import os   
 from supabase import create_client
 from flask import Flask, request, jsonify
 
@@ -30,14 +41,9 @@ app = Flask(__name__)
 
 
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
 # # Initialize models
 ollama_embeddings = OllamaEmbeddings(model="zephyr",base_url = 'http://127.0.0.1:11434')
 
-
-doc_reader = PyPDFLoader("./pdfs/prompt.pdf")
-docs = doc_reader.load_and_split()[0:5]
 url = "https://oxkmkprtwkuiewajaqvx.supabase.co"
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94a21rcHJ0d2t1aWV3YWphcXZ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDM4Mzc3MDEsImV4cCI6MjAxOTQxMzcwMX0.vWKFLz2r_RzuJ_ZnsMFvp0srckuMcjCiB7RkfhlGj_c"
 model = Ollama(model="zephyr",base_url = 'http://127.0.0.1:11434',temperature=0)
@@ -46,6 +52,7 @@ model = Ollama(model="zephyr",base_url = 'http://127.0.0.1:11434',temperature=0)
 
 # Initialize client
 supabase_client = create_client(url, key)
+
 
 
 vectorstore = SupabaseVectorStore(
@@ -63,7 +70,6 @@ Use the following context (delimited by <ctx></ctx>) and the chat history (delim
 ------
 <history> {history} </history>
 ------
-
 {question}
 Answer:
 """
