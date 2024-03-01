@@ -9,17 +9,6 @@
 
 
 
-# successfully run 
-# flask + locally ollama + Memory + retrivalQA   
-# in postman 
-#   link :--  POST  http://127.0.0.1:5000/api/query for query 
-#  body {   
-#     // "query":"give me 5 question that i created for the exam  in points",
-#     "text":"hello"
-# }
-
-
-
 from langchain_community.vectorstores import   SupabaseVectorStore
 from supabase import create_client
 from flask import Flask, request, jsonify
