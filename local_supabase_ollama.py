@@ -53,23 +53,17 @@ print("ans:-->", ans)
 
 
 
+
 # (successfully run and give  answer according to context )
 #  using flask 
 
-from PyPDF2 import PdfReader
-from langchain_openai import OpenAIEmbeddings
-from langchain.text_splitter import CharacterTextSplitter
-from langchain_community.vectorstores import FAISS 
 from langchain_community.vectorstores import   SupabaseVectorStore
-from langchain.chains.question_answering import load_qa_chain
-import os   
 from supabase import create_client
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.llms import Ollama
 from flask import Flask, request, jsonify
 from langchain.chains import RetrievalQA
-from langchain_core.documents import Document
 from httpx import WriteTimeout
 app = Flask(__name__)
 
@@ -79,7 +73,8 @@ ollama_embeddings = OllamaEmbeddings(model="luffy",base_url = 'http://127.0.0.1:
 model = Ollama(model="luffy",base_url = 'http://127.0.0.1:11434',temperature=1)
 
 
-doc_reader = PyPDFLoader("impromptu-rh.pdf")
+doc_reader = PyPDFLoader("pdfs/prompt.pdf")
+
 docs = doc_reader.load_and_split()[0:5]
 
 print("pdf load")
@@ -125,11 +120,9 @@ def query():
      # Invoke the retrieval chain with the query
     result = retrieval_chain.invoke({"query": query_text})    
     return jsonify({'result': result})
-    # return "ishu here"
 
 
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
